@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             calc = new Calculator();
+            op = "";
         }
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
@@ -38,11 +39,13 @@ namespace WindowsFormsApp1
 
         public void execute()
         {
+            /*
             if (op == "" || textResult.Text == "")
             {
                 if (textResult.Text != "" ) calc.setCur(double.Parse(textResult.Text));
                 return;
             }
+            */
             switch (op)
             {
                 case "+": calc.add(double.Parse(textResult.Text)); break;
@@ -62,17 +65,20 @@ namespace WindowsFormsApp1
                 {
                     case "erase": break;
                     case "CE": textResult.Text = ""; break;
-                    case "C": textResult.Text = ""; calc.setCur(0) ; break;
-                    case "=": execute(); textResult.Text = calc.cur.Val.ToString(); break;
+                    case "C": textResult.Text = ""; textResult2.Text = ""; calc.setCur(0) ; break;
+                    case "=": execute(); textResult2.Text = ""; textResult.Text = calc.cur.Val.ToString(); break;
                     default: break;
                 }
             }
             else if (((Button)sender).Tag == "AlgebraOp")
             {
-                if(textResult.Text != "") calc.setCur(double.Parse(textResult.Text));
-                execute();
+                if (op != "") execute();
+                else if (textResult.Text != "") calc.setCur(double.Parse(textResult.Text));
+                else return;
+                textResult2.Text += textResult.Text;
                 textResult.Text = "";
                 op = ((Button)sender).Text;
+                textResult2.Text += op;
 
             }
             else if (((Button)sender).Tag == "MemOp")
@@ -100,6 +106,11 @@ namespace WindowsFormsApp1
             {
                 textResult.Text += ((Button)sender).Text;
             }
+        }
+
+        private void textResult2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
