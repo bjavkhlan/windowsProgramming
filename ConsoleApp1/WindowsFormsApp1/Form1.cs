@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
 
         }
 
-        public void execute()
+        private void execute()
         {
             /*
             if (op == "" || textResult.Text == "")
@@ -57,6 +57,13 @@ namespace WindowsFormsApp1
             op = "";
         }
 
+        private void writeHistory() {
+
+            PanelHistory.Controls.Add(new Label());
+            ((Label)PanelHistory.Controls[PanelHistory.Controls.Count - 1]).Font.Size.;
+           ((Label)PanelHistory.Controls[PanelHistory.Controls.Count-1]).Text = textResult2.Text + textResult.Text + "=" + calc.cur.Val.ToString();
+        }
+
         private void button_Click(object sender, EventArgs e)
         {
             if (((Button)sender).Tag == "Op")
@@ -66,7 +73,7 @@ namespace WindowsFormsApp1
                     case "erase": break;
                     case "CE": textResult.Text = ""; break;
                     case "C": textResult.Text = ""; textResult2.Text = ""; calc.setCur(0) ; break;
-                    case "=": execute(); textResult2.Text = ""; textResult.Text = calc.cur.Val.ToString(); break;
+                    case "=": execute(); writeHistory(); textResult2.Text = ""; textResult.Text = calc.cur.Val.ToString(); break;
                     default: break;
                 }
             }
@@ -119,6 +126,11 @@ namespace WindowsFormsApp1
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void History_Click(object sender, EventArgs e)
         {
 
         }
